@@ -3,12 +3,12 @@
 ## Description
 JotNotes is a note-taking application built with node.js and express.js that allows the user to record their thoughts, work notes, and activities quickly and cleanly. It is deployed to Heroku. 
 
-* See it live at [JotNotes](https://git.heroku.com/jotnotes29.git) 
+* See it live at [JotNotes](https://jotnotes29.herokuapp.com) 
 ![Landing Page](./public/assets/img/landingPageSS.png)
 ![Notes Page](./public/assets/img/notesPageSS.png)
 
 ## Installation
-The application can be viewed live [here](https://git.heroku.com/jotnotes29.git) 
+The application can be viewed live in any browser
 
 ## Usage
 * Click the new note button to create a new note, and save the note with the save button. 
