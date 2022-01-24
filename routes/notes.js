@@ -1,5 +1,5 @@
 const notes = require('express').Router();
-const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
+const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils');
 var uniqid = require('uniqid'); 
 
 // GET Route for retrieving all the notes
@@ -34,6 +34,21 @@ notes.post('/', (req, res) => {
   } else {
     res.json('Error in adding note');
   }
+});
+
+// DELETE Route for deleting a note
+notes.delete('/:id', (req, res) => {
+  console.info(`${req.method} request received for current note`);
+  const noteId = req.params.id;
+
+  readFromFile('./db/db.json')
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      // Make a new array of all notes except the one we are deleting
+      const result = json.filter((note) => note.id !== noteId);
+      writeToFile('./db/db.json', result);
+      res.json(`Note ${noteId} has been deleted`);
+    });
 });
 
 module.exports = notes;
