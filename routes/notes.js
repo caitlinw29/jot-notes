@@ -1,5 +1,6 @@
 const notes = require('express').Router();
 const { readFromFile, writeToFile, readAndAppend } = require('../helpers/fsUtils');
+//provides ids for notes
 var uniqid = require('uniqid'); 
 
 // GET Route for retrieving all the notes
@@ -16,7 +17,7 @@ notes.post('/', (req, res) => {
 
   // If all the required properties are present
   if (title && text) {
-    // Variable for the object we will save
+    // Create a new object, don't mutate original
     const newNote = {
       title,
       text,
@@ -46,6 +47,7 @@ notes.delete('/:id', (req, res) => {
     .then((json) => {
       // Make a new array of all notes except the one we are deleting
       const result = json.filter((note) => note.id !== noteId);
+      //then write the result back to the db.json
       writeToFile('./db/db.json', result);
       res.json(`Note ${noteId} has been deleted`);
     });
