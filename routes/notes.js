@@ -1,7 +1,6 @@
 const notes = require('express').Router();
 const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
-//ToDo: Add the uniqid package instead of helper function
-// const uuid = require('../helpers/uuid');
+var uniqid = require('uniqid'); 
 
 // GET Route for retrieving all the notes
 notes.get('/', (req, res) => {
@@ -21,7 +20,7 @@ notes.post('/', (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: 3,
+      note_id: uniqid(),
     };
 
     readAndAppend(newNote, './db/db.json');
